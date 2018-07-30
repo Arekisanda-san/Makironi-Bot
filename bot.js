@@ -73,7 +73,7 @@ client.on("message", async message => {
   }
 
   if(command === "avatar") {		
-    let member = message.mentions.members.first() || client.users.find("username", args[0]);
+    let member = message.mentions.users.first() || client.users.find("username", args[0]);
     //  If no member specified, grabs the author's avi
     if(!member)
       return message.channel.send(message.author.avatarURL);
