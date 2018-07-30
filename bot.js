@@ -79,7 +79,7 @@ client.on("message", async message => {
 		return message.channel.send(message.author.avatarURL);
 	}
 	
-    let member = message.mentions.users.first() || client.users.find("username", args[0]);
+    let member = message.mentions.users.first() || client.users.find("username", args[0]) || message.guild.members.find("nickname", args[0]).user;
 
     // Grabs the mentioned user's avi
     message.channel.send(member.avatarURL);
