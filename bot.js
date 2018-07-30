@@ -72,17 +72,14 @@ client.on("message", async message => {
     //message.channel.send(sayMessage);
   }
 
-  if(command === "avatar") {
-    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-
+  if(command === "avatar") {		
+    let member = message.mentions.members.first() || client.users.find("username", args[0]);
     //  If no member specified, grabs the author's avi
     if(!member)
-    return message.channel.send(message.author.avatarURL);
-
-    //console.log(`${message.mentions.members.first()}`);
+      return message.channel.send(message.author.avatarURL);
 
     // Grabs the mentioned user's avi
-    message.channel.send(message.mentions.members.first().user.avatarURL);
+    message.channel.send(member.avatarURL);
 
     //message.channel.send(message.member.user.avatarURL);
     //message.channel.send(message.member.nickname);
@@ -240,7 +237,6 @@ client.on('guildBanRemove', async (message) => {
 
   banlogs.send(`${unbannedBoy} was unbanned by ${user} for the following reason:  ${raisin}`);
 })
-
 
 
 
