@@ -133,6 +133,10 @@ client.on("message", async message => {
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
+  if (command === "daveism")
+  {
+	return message.reply("City pop is like Steely Dan for Millenials, y'know? Myself, I prefer music I can understand. I memorized the lyrics to Macarena so I could sing it on my kid's birthday.");
+  }
 /*
   if(command === "purge") {
     // This command removes all messages from all users in the channel, up to 100.
