@@ -72,20 +72,17 @@ client.on("message", async message => {
     //message.channel.send(sayMessage);
   }
 
-  if(command === "avatar") {		
+  if(command === "avatar") {
+	//If no member specified, grabs the author's avi
+	if (args.length === 0)
+	{
+		return message.channel.send(message.author.avatarURL);
+	}
+	
     let member = message.mentions.users.first() || client.users.find("username", args[0]);
-    //  If no member specified, grabs the author's avi
-    if(!member)
-      return message.channel.send(message.author.avatarURL);
 
     // Grabs the mentioned user's avi
     message.channel.send(member.avatarURL);
-
-    //message.channel.send(message.member.user.avatarURL);
-    //message.channel.send(message.member.nickname);
-    //const m = await message.channel.send("avatar");
-    //message.channel.send(message.avatar.avatarURL);
-    //message.guild.channels.get("436745249122025472").send(message.avatar.avatarURL);
   }
 
 
