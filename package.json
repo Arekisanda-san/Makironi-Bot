@@ -1,0 +1,10 @@
+{
+  "name": "Formalrecordsbot",
+  "version": "1.0.0",
+  "description": "Remember who you are",
+  "main": "bot.js",
+  "author": "Andrew",
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
