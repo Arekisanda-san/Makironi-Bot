@@ -85,7 +85,7 @@ client.on("message", async message => {
     message.channel.send(member.avatarURL);
   }
 
-
+/*
   if(command === "kick") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
     // Please read on Array.some() to understand this bit:
@@ -114,6 +114,8 @@ client.on("message", async message => {
 
   }
 
+  */
+/*
   if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
     // In the real world mods could ban too, but this is just an example, right? ;)
@@ -132,7 +134,7 @@ client.on("message", async message => {
     await member.ban(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
-  }
+  }*/
 /*
   if(command === "purge") {
     // This command removes all messages from all users in the channel, up to 100.
