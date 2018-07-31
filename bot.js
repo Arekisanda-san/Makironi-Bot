@@ -181,8 +181,9 @@ client.on('messageDelete', async (message) => {
 
 
 
-//Log the bans
-client.on('guildBanAdd', async (message) => {
+
+
+client.on('roleCreate', async (message) => {
   //message.guild.channels.get("472868596301692928").send("About to initialize entry");
   const logs = message.guild.channels.find('name', 'logs');
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
@@ -192,49 +193,101 @@ client.on('guildBanAdd', async (message) => {
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }
   //message.guild.channels.get("472868596301692928").send("About to initialize entry");
-  const entry = await message.guild.fetchAuditLogs({type: 'MEMBER_BAN_ADD'}).then(audit => audit.entries.first())
+  const entry = await message.guild.fetchAuditLogs({type: 'ROLE_CREATE'}).then(audit => audit.entries.first())
   //logs.send(`passed entry initialization`);
   let user = ""
-  let bannedBoy = ""
-  let raisin = ""
+
 
 
     user = entry.executor.username
-    bannedBoy = entry.target.username
-    raisin = entry.reason
-    //user = entry.executor.username
 
-  logs.send(`${bannedBoy} was banned by ${user} for the following reason:  ${raisin}`);
+    //user = entry.executor.username
+  logs.send(`A new role was created by ${user}`);
+})
+
+
+client.on('roleDelete', async (role) => {
+  let guild = client.guilds.get("332159937545240588");
+  const logs = guild.channels.find('name', 'logs');
+  const entry = await guild.fetchAuditLogs({type: 'ROLE_DELETE'}).then(audit => audit.entries.first())
+  //console.log(roleDelete.role)
+  //console.log(`target name is ${entry.target.name}`)
+  let user = entry.executor.username
+  //let deletedRole = entry.target.name
+  logs.send(`The role ${role.name} was deleted by ${user}`);
 })
 
 
 
-//Log the bans
-client.on('guildBanRemove', async (message) => {
-  //message.guild.channels.get("472868596301692928").send("About to initialize entry");
-  const banlogs = message.guild.channels.find('name', 'banlogs');
-  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !banlogs) {
-    message.guild.createChannel('banlogs', 'text');
-  }
-  if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !banlogs) {
-    console.log('The banlogs channel does not exist and tried to create the channel but I am lacking permissions')
-  }
-  //message.guild.channels.get("472868596301692928").send("About to initialize entry");
-  const entry = await message.guild.fetchAuditLogs({type: 'MEMBER_BAN_REMOVE'}).then(audit => audit.entries.first())
-  //logs.send(`passed entry initialization`);
-  let user = ""
-  let unbannedBoy = ""
-  let raisin = ""
 
-
-    user = entry.executor.username
-    unbannedBoy = entry.target.username
-    raisin = entry.reason
-    //user = entry.executor.username
-
-  banlogs.send(`${unbannedBoy} was unbanned by ${user} for the following reason:  ${raisin}`);
+client.on('roleUpdate', async (role) => {
+  let guild = client.guilds.get("332159937545240588");
+  const logs = guild.channels.find('name', 'logs');
+  const entry = await guild.fetchAuditLogs({type: 'ROLE_UPDATE'}).then(audit => audit.entries.first())
+  //console.log(entry.changes)
+  //console.log(roleDelete.role)
+  //console.log(`target name is ${entry.target.name}`)
+  let user = entry.executor.username
+  //let deletedRole = entry.target.name
+  logs.send(`The role ${role.name} was changed by ${user}.  Due to how Discord is handling permissions, I don't know how to display the change at the moment.  Please consult the actual audit log to see the changes made.`);
 })
 
+
+
+client.on('guildMemberAdd', async (member) => {
+  let guild = client.guilds.get("332159937545240588");
+  const logs = guild.channels.find('name', 'logs');
+
+
+  logs.send(`${member.user.username} has entered the server`);
+})
+
+
+
+client.on('guildMemberRemove', async (member) => {
+  let guild = client.guilds.get("332159937545240588");
+  const logs = guild.channels.find('name', 'logs');
+  const entry = await guild.fetchAuditLogs({type: 'MEMBER_KICK'}).then(audit => audit.entries.first())
+  //console.log(entry.changes)
+  //console.log(roleDelete.role)
+  //console.log(`target name is ${entry.target.name}`)
+  if(entry.executor){
+  let user = entry.executor.username
+  return logs.send(`${member.user.username} was kicked by ${user}.`);
+}
+  //let deletedRole = entry.target.name
+  logs.send(`${member.user.username} has left the server`);
+})
+
+
+
+client.on('guildBanAdd', async (guild, user) => {
+  //let guild = client.guilds.get("332159937545240588");
+  const logs = guild.channels.find('name', 'logs');
+  const entry = await guild.fetchAuditLogs({type: 'MEMBER_BAN_ADD'}).then(audit => audit.entries.first())
+  //console.log(entry.changes)
+
+  //console.log(roleDelete.role)
+  //console.log(`target name is ${entry.target.name}`)
+
+  //console.log(`${user}`)
+  let banner = entry.executor.username
+  logs.send(`${user.username} has been banned by ${banner}`);
+})
+
+
+client.on('guildBanRemove', async (guild, user) => {
+  //let guild = client.guilds.get("332159937545240588");
+  const logs = guild.channels.find('name', 'logs');
+  const entry = await guild.fetchAuditLogs({type: 'MEMBER_BAN_REMOVE'}).then(audit => audit.entries.first())
+  //console.log(user)   CURSED.  DO NOT USE.
+  //console.log(roleDelete.role)
+  //console.log(`target name is ${entry.target.name}`)
+  //console.log(`${members.user}`)
+  //let deletedRole = entry.target.name
+  let unbanner = entry.executor.username
+  logs.send(`${user.username} has been unbanned by ${unbanner}`);
+})
 
 
 
