@@ -16,7 +16,7 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  client.user.setActivity(`Taking notes`);
+  client.user.setActivity(`Do your best!`);
 });
 
 client.on("guildCreate", guild => {
@@ -68,11 +68,12 @@ client.on("message", async message => {
     // And we get the bot to say the thing:
     //channel = message.guild.channels.get("436745249122025472");
     //message.guild.channels.get("436745249122025472").send(sayMessage);
-    message.guild.channels.get("436745249122025472").send(message.member + ":  " + sayMessage);
+    //Targeting welcomes
+    message.guild.channels.get("231664026021658624").send(message.member + ":  " + sayMessage);
     //message.channel.send(sayMessage);
   }
 
-  if(command === "avatar") {
+  if(command === "avatar" || command === "avi" || command === "a") {
 	//If no member specified, grabs the author's avi
 	if (args.length === 0)
 	{
@@ -84,6 +85,27 @@ client.on("message", async message => {
     // Grabs the mentioned user's avi
     message.channel.send(member.avatarURL);
   }
+
+// Ninian is dead.
+  if(command === "dead")
+  {
+    if (args.length === 0)
+    {
+      return message.channel.send(`Nobody is dead.`);
+    }
+    message.channel.send(`${args.join(" ")} is dead.`);
+  }
+
+if(command === "emoji" || command === "e")
+{
+const calledEmoji = args.join(" ");
+  const calledEmojiID = client.emojis.find("name", `${calledEmoji}`)
+  if (!calledEmojiID)
+  {
+    return message.channel.send("Emoji could not be found");
+  }
+  message.channel.send(`${calledEmojiID}`)
+}
 
 /*
   if(command === "kick") {
@@ -156,6 +178,7 @@ client.on("message", async message => {
 
 client.on('messageDelete', async (message) => {
   //message.guild.channels.get("472868596301692928").send("About to initialize entry");
+  /*
   const logs = message.guild.channels.find('name', 'logs');
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
     message.guild.createChannel('logs', 'text');
@@ -163,6 +186,7 @@ client.on('messageDelete', async (message) => {
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }
+  */
   //message.guild.channels.get("472868596301692928").send("About to initialize entry");
   const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
   //logs.send(`passed entry initialization`);
@@ -178,7 +202,8 @@ client.on('messageDelete', async (message) => {
     user = message.author.username
   }
     //user = entry.executor.username
-  logs.send(`A message was deleted in ${message.channel.name} by ${user}`);
+    // Currently targeting audits
+  message.guild.channels.get("474584778159423488").send(`A message was deleted in ${message.channel.name} by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
 })
 
 
@@ -187,6 +212,7 @@ client.on('messageDelete', async (message) => {
 
 client.on('roleCreate', async (message) => {
   //message.guild.channels.get("472868596301692928").send("About to initialize entry");
+  /*
   const logs = message.guild.channels.find('name', 'logs');
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
     message.guild.createChannel('logs', 'text');
@@ -194,6 +220,7 @@ client.on('roleCreate', async (message) => {
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }
+  */
   //message.guild.channels.get("472868596301692928").send("About to initialize entry");
   const entry = await message.guild.fetchAuditLogs({type: 'ROLE_CREATE'}).then(audit => audit.entries.first())
   //logs.send(`passed entry initialization`);
@@ -204,68 +231,79 @@ client.on('roleCreate', async (message) => {
     user = entry.executor.username
 
     //user = entry.executor.username
-  logs.send(`A new role was created by ${user}`);
+    // Targeting audits
+message.guild.channels.get("474584778159423488").send(`A new role was created by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
 })
 
 
 client.on('roleDelete', async (role) => {
-  let guild = client.guilds.get("332159937545240588");
-  const logs = guild.channels.find('name', 'logs');
+  let guild = client.guilds.get("188345757265297418");
+
+  //const logs = guild.channels.find('name', 'logs');
+
   const entry = await guild.fetchAuditLogs({type: 'ROLE_DELETE'}).then(audit => audit.entries.first())
   //console.log(roleDelete.role)
   //console.log(`target name is ${entry.target.name}`)
   let user = entry.executor.username
   //let deletedRole = entry.target.name
-  logs.send(`The role ${role.name} was deleted by ${user}`);
+  //  Targeting audits
+  guild.channels.get("474584778159423488").send(`The role ${role.name} was deleted by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
 })
 
 
-
-
+// Commented out until I can fix the spam
+/*
 client.on('roleUpdate', async (role) => {
-  let guild = client.guilds.get("332159937545240588");
-  const logs = guild.channels.find('name', 'logs');
+  let guild = client.guilds.get("188345757265297418");
+  //const logs = guild.channels.find('name', 'logs');
   const entry = await guild.fetchAuditLogs({type: 'ROLE_UPDATE'}).then(audit => audit.entries.first())
   //console.log(entry.changes)
   //console.log(roleDelete.role)
   //console.log(`target name is ${entry.target.name}`)
   let user = entry.executor.username
   //let deletedRole = entry.target.name
-  logs.send(`The role ${role.name} was changed by ${user}.  Due to how Discord is handling permissions, I don't know how to display the change at the moment.  Please consult the actual audit log to see the changes made.`);
+  // Targeting audits
+  guild.channels.get("474584778159423488").send(`The role ${role.name} was changed by ${user} at [${new Date().toTimeString().split(" ")[0]}].  Due to how Discord is handling permissions, I don't know how to display the change at the moment.  Please consult the actual audit log to see the changes made.`);
 })
-
+*/
 
 
 client.on('guildMemberAdd', async (member) => {
-  let guild = client.guilds.get("332159937545240588");
-  const logs = guild.channels.find('name', 'logs');
+  console.log("MEMBER HAS ENTERED")
+  let guild = client.guilds.get("188345757265297418");
+  //const logs = guild.channels.find('name', 'boolin');
 
-
-  logs.send(`${member.user.username} has entered the server`);
+//Targeting welcomes
+  guild.channels.get("280222534929219584").send(`${member.user.username} has entered the server at [${new Date().toTimeString().split(" ")[0]}].`);
+  //logs.send(`${member.user.username} has entered the server`)
 })
 
 
 
 client.on('guildMemberRemove', async (member) => {
-  let guild = client.guilds.get("332159937545240588");
-  const logs = guild.channels.find('name', 'logs');
+  let guild = client.guilds.get("188345757265297418");
+  //const logs = guild.channels.find('name', 'logs');
   const entry = await guild.fetchAuditLogs({type: 'MEMBER_KICK'}).then(audit => audit.entries.first())
   //console.log(entry.changes)
   //console.log(roleDelete.role)
   //console.log(`target name is ${entry.target.name}`)
+  /*
   if(entry.executor){
   let user = entry.executor.username
-  return logs.send(`${member.user.username} was kicked by ${user}.`);
+  //Targeting kicks
+   guild.channels.get("474584725466513408").send(`${member.user.username} was kicked by ${user}.`);
 }
+*/
   //let deletedRole = entry.target.name
-  logs.send(`${member.user.username} has left the server`);
+  // Targeting welcomes
+  guild.channels.get("280222534929219584").send(`${member.user.username} has left the server at [${new Date().toTimeString().split(" ")[0]}].`);
 })
 
 
 
 client.on('guildBanAdd', async (guild, user) => {
   //let guild = client.guilds.get("332159937545240588");
-  const logs = guild.channels.find('name', 'logs');
+  //const logs = guild.channels.find('name', 'logs');
   const entry = await guild.fetchAuditLogs({type: 'MEMBER_BAN_ADD'}).then(audit => audit.entries.first())
   //console.log(entry.changes)
 
@@ -274,13 +312,14 @@ client.on('guildBanAdd', async (guild, user) => {
 
   //console.log(`${user}`)
   let banner = entry.executor.username
-  logs.send(`${user.username} has been banned by ${banner}`);
+  // Targeting bans
+  guild.channels.get("474584636417245184").send(`${user.username} has been banned by ${banner} at [${new Date().toTimeString().split(" ")[0]}].`);
 })
 
 
 client.on('guildBanRemove', async (guild, user) => {
   //let guild = client.guilds.get("332159937545240588");
-  const logs = guild.channels.find('name', 'logs');
+  //const logs = guild.channels.find('name', 'logs');
   const entry = await guild.fetchAuditLogs({type: 'MEMBER_BAN_REMOVE'}).then(audit => audit.entries.first())
   //console.log(user)   CURSED.  DO NOT USE.
   //console.log(roleDelete.role)
@@ -288,9 +327,22 @@ client.on('guildBanRemove', async (guild, user) => {
   //console.log(`${members.user}`)
   //let deletedRole = entry.target.name
   let unbanner = entry.executor.username
-  logs.send(`${user.username} has been unbanned by ${unbanner}`);
+  //Targeting bans
+  guild.channels.get("474584636417245184").send(`${user.username} has been unbanned by ${unbanner} at [${new Date().toTimeString().split(" ")[0]}].`);
 })
 
-
+client.on('emojiDelete', async (emoji) => {
+  //let guild = client.guilds.get("332159937545240588");
+  //const logs = guild.channels.find('name', 'logs');
+  const entry = await guild.fetchAuditLogs({type: 'EMOJI_DELETE'}).then(audit => audit.entries.first())
+  //console.log(user)   CURSED.  DO NOT USE.
+  //console.log(roleDelete.role)
+  //console.log(`target name is ${entry.target.name}`)
+  //console.log(`${members.user}`)
+  //let deletedRole = entry.target.name
+  let unbanner = entry.executor.username
+  //Targeting bans
+  guild.channels.get("474584778159423488").send(`${emoji.name} has been deleted by ${unbanner} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
+})
 
 client.login(config.token);
