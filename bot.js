@@ -107,6 +107,22 @@ const calledEmoji = args.join(" ");
   message.channel.send(`${calledEmojiID}`)
 }
 
+if(command === "help" || command === "h")
+{
+  message.channel.send("=avatar/avi/a")
+  message.channel.send("=dead <text here>")
+  message.channel.send("=emoji/e <emoji name here>")
+  message.channel.send("=help/h")
+  message.channel.send("=inviteme")
+  message.channel.send("=record <text here>")
+  message.channel.send("=remember")
+
+}
+
+if(command === "inviteme")
+{
+  message.channel.send("https://discordapp.com/oauth2/authorize?&client_id=473326746834305033&scope=bot&permissions=0")
+}
 /*
   if(command === "kick") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
