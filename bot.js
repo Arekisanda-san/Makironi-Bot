@@ -16,7 +16,7 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  client.user.setActivity(`Do your best!`);
+  client.user.setActivity(`React command added!`);
 });
 
 client.on("guildCreate", guild => {
@@ -91,7 +91,7 @@ client.on("message", async message => {
   {
     if (args.length === 0)
     {
-      return message.channel.send(`Nobody is dead.`);
+      return message.channel.send(`Ninian is dead.`);
     }
     message.channel.send(`${args.join(" ")} is dead.`);
   }
@@ -102,27 +102,72 @@ const calledEmoji = args.join(" ");
   const calledEmojiID = client.emojis.find("name", `${calledEmoji}`)
   if (!calledEmojiID)
   {
-    return message.channel.send("Emoji could not be found");
+    return message.channel.send("Emoji could not be found. It is either in a server I'm not in, or it's a default emoji.");
   }
+
+
   message.channel.send(`${calledEmojiID}`)
 }
 
+if(command === "bigemoji" || command === "be")
+{
+const calledEmoji = args.join(" ");
+  const calledEmojiID = client.emojis.find("name", `${calledEmoji}`)
+
+  if (!calledEmojiID)
+  {
+    return message.channel.send("Emoji could not be found. It is either in a server I'm not in, or it's a default emoji.");
+  }
+
+
+  message.channel.send(`${calledEmojiID.url}`)
+}
+
+
+if(command === "genesis")
+{
+  message.channel.send("https://cdn.discordapp.com/attachments/359166220609650688/478388553475424256/unknown.png")
+  message.channel.send("This was the screen that popped up when I first started the bot")
+}
+
+
 if(command === "help" || command === "h")
 {
-  message.channel.send("=avatar/avi/a")
-  message.channel.send("=dead <text here>")
-  message.channel.send("=emoji/e <emoji name here>")
-  message.channel.send("=help/h")
-  message.channel.send("=inviteme")
-  message.channel.send("=record <text here>")
-  message.channel.send("=remember")
-
+  message.channel.send("=avatar/avi/a \n=dead <text here> \n=bigemoji/be <emoji name here> \n=emoji/e <emoji name here> \n=genesis \n=help/h \n=inviteme \n=record <text here> \n=react/r <messageID(get it by right clicking in dev view)> <emoji name>\n=remember \n=setactivity BOT OWNER ONLY \n")
 }
 
 if(command === "inviteme")
 {
-  message.channel.send("https://discordapp.com/oauth2/authorize?&client_id=473326746834305033&scope=bot&permissions=0")
+  message.channel.send("https://discordapp.com/oauth2/authorize?&client_id=472593993692348416&scope=bot&permissions=0")
 }
+
+if(command === "react" || command === "r")
+{
+  const calledMessageID = (`${args[0]}`);
+  const calledEmoji     = (`${args[1]}`);
+  const calledEmojiID   = client.emojis.find("name", `${calledEmoji}`)
+  if (!calledEmojiID)
+  {
+    return message.channel.send("Emoji could not be found");
+  }
+  channel = message.channel
+  message.channel.fetchMessage(`${calledMessageID}`)
+  .then(message => message.react(client.emojis.find("name", `${calledEmoji}`)))
+  .catch(console.error)
+}
+
+// Only I can use this command, as it's checking for my ID
+if(command === "setactivity")
+{
+
+  if (message.member.user.id === "266777226412949504" || message.member.user.id === "166343129643876352" || message.member.user.id === "340964304516022272")
+  {
+return client.user.setActivity(`${args.join(" ")}`);
+  }
+  message.channel.send("Sorry, this command is only available to the owner of this bot")
+}
+
+
 /*
   if(command === "kick") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
@@ -203,6 +248,9 @@ client.on('messageDelete', async (message) => {
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }
   */
+//  Locks audits to SPEcord
+  if (message.guild.id === "188345757265297418")
+  {
   //message.guild.channels.get("472868596301692928").send("About to initialize entry");
   const entry = await message.guild.fetchAuditLogs({type: 'MESSAGE_DELETE'}).then(audit => audit.entries.first())
   //logs.send(`passed entry initialization`);
@@ -219,7 +267,9 @@ client.on('messageDelete', async (message) => {
   }
     //user = entry.executor.username
     // Currently targeting audits
-  message.guild.channels.get("474584778159423488").send(`A message was deleted in ${message.channel.name} by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
+  return message.guild.channels.get("474584778159423488").send(`A message was deleted in ${message.channel.name} by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
+}
+
 })
 
 
@@ -237,6 +287,8 @@ client.on('roleCreate', async (message) => {
     console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }
   */
+  if (message.guild.id === "188345757265297418")
+  {
   //message.guild.channels.get("472868596301692928").send("About to initialize entry");
   const entry = await message.guild.fetchAuditLogs({type: 'ROLE_CREATE'}).then(audit => audit.entries.first())
   //logs.send(`passed entry initialization`);
@@ -249,10 +301,13 @@ client.on('roleCreate', async (message) => {
     //user = entry.executor.username
     // Targeting audits
 message.guild.channels.get("474584778159423488").send(`A new role was created by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
+}
 })
 
 
-client.on('roleDelete', async (role) => {
+client.on('roleDelete', async (role) =>
+{
+  if (role.guild.id === "188345757265297418"){
   let guild = client.guilds.get("188345757265297418");
 
   //const logs = guild.channels.find('name', 'logs');
@@ -264,7 +319,7 @@ client.on('roleDelete', async (role) => {
   //let deletedRole = entry.target.name
   //  Targeting audits
   guild.channels.get("474584778159423488").send(`The role ${role.name} was deleted by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
-})
+}})
 
 
 // Commented out until I can fix the spam
@@ -282,9 +337,35 @@ client.on('roleUpdate', async (role) => {
   guild.channels.get("474584778159423488").send(`The role ${role.name} was changed by ${user} at [${new Date().toTimeString().split(" ")[0]}].  Due to how Discord is handling permissions, I don't know how to display the change at the moment.  Please consult the actual audit log to see the changes made.`);
 })
 */
+client.on('emojiCreate', async (emoji) => {
+if (emoji.guild.id === "188345757265297418"){
+  const entry = await guild.fetchAuditLogs({type: 'EMOJI_CREATE'}).then(audit => audit.entries.first())
+  let creator = entry.executor.username
+  //Targeting audits
+  guild.channels.get("474584778159423488").send(`${emoji.name} has been created by ${creator} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
+}})
+
+client.on('emojiUpdate', async (emoji) => {
+  if (emoji.guild.id === "188345757265297418"){
+  const entry = await guild.fetchAuditLogs({type: 'EMOJI_UPDATE'}).then(audit => audit.entries.first())
+  let updater = entry.executor.username
+  //Targeting audits
+  guild.channels.get("474584778159423488").send(`${emoji.name} has been updated by ${updater} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
+}})
+
+client.on('emojiDelete', async (emoji) => {
+if (emoji.guild.id === "188345757265297418"){
+  const entry = await guild.fetchAuditLogs({type: 'EMOJI_DELETE'}).then(audit => audit.entries.first())
+
+  let deleter = entry.executor.username
+  //Targeting audits
+  guild.channels.get("474584778159423488").send(`${emoji.name} has been deleted by ${deleter} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
+}})
+
 
 
 client.on('guildMemberAdd', async (member) => {
+if (member.guild.id === "188345757265297418"){
   console.log("MEMBER HAS ENTERED")
   let guild = client.guilds.get("188345757265297418");
   //const logs = guild.channels.find('name', 'boolin');
@@ -292,11 +373,12 @@ client.on('guildMemberAdd', async (member) => {
 //Targeting welcomes
   guild.channels.get("280222534929219584").send(`${member.user.username} has entered the server at [${new Date().toTimeString().split(" ")[0]}].`);
   //logs.send(`${member.user.username} has entered the server`)
-})
+}})
 
 
 
 client.on('guildMemberRemove', async (member) => {
+  if (role.guild.id === "188345757265297418"){
   let guild = client.guilds.get("188345757265297418");
   //const logs = guild.channels.find('name', 'logs');
   const entry = await guild.fetchAuditLogs({type: 'MEMBER_KICK'}).then(audit => audit.entries.first())
@@ -313,13 +395,14 @@ client.on('guildMemberRemove', async (member) => {
   //let deletedRole = entry.target.name
   // Targeting welcomes
   guild.channels.get("280222534929219584").send(`${member.user.username} has left the server at [${new Date().toTimeString().split(" ")[0]}].`);
-})
+}})
 
 
 
 client.on('guildBanAdd', async (guild, user) => {
   //let guild = client.guilds.get("332159937545240588");
   //const logs = guild.channels.find('name', 'logs');
+  if (guild.id === "188345757265297418"){
   const entry = await guild.fetchAuditLogs({type: 'MEMBER_BAN_ADD'}).then(audit => audit.entries.first())
   //console.log(entry.changes)
 
@@ -330,12 +413,13 @@ client.on('guildBanAdd', async (guild, user) => {
   let banner = entry.executor.username
   // Targeting bans
   guild.channels.get("474584636417245184").send(`${user.username} has been banned by ${banner} at [${new Date().toTimeString().split(" ")[0]}].`);
-})
+}})
 
 
 client.on('guildBanRemove', async (guild, user) => {
   //let guild = client.guilds.get("332159937545240588");
   //const logs = guild.channels.find('name', 'logs');
+  if (guild.id === "188345757265297418"){
   const entry = await guild.fetchAuditLogs({type: 'MEMBER_BAN_REMOVE'}).then(audit => audit.entries.first())
   //console.log(user)   CURSED.  DO NOT USE.
   //console.log(roleDelete.role)
@@ -345,20 +429,8 @@ client.on('guildBanRemove', async (guild, user) => {
   let unbanner = entry.executor.username
   //Targeting bans
   guild.channels.get("474584636417245184").send(`${user.username} has been unbanned by ${unbanner} at [${new Date().toTimeString().split(" ")[0]}].`);
-})
+}})
 
-client.on('emojiDelete', async (emoji) => {
-  //let guild = client.guilds.get("332159937545240588");
-  //const logs = guild.channels.find('name', 'logs');
-  const entry = await guild.fetchAuditLogs({type: 'EMOJI_DELETE'}).then(audit => audit.entries.first())
-  //console.log(user)   CURSED.  DO NOT USE.
-  //console.log(roleDelete.role)
-  //console.log(`target name is ${entry.target.name}`)
-  //console.log(`${members.user}`)
-  //let deletedRole = entry.target.name
-  let unbanner = entry.executor.username
-  //Targeting bans
-  guild.channels.get("474584778159423488").send(`${emoji.name} has been deleted by ${unbanner} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
-})
+
 
 client.login(config.token);
