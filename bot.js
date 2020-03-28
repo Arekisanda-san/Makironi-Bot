@@ -16,7 +16,7 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  client.user.setActivity(`React command added!`);
+  client.user.setActivity(`Now testing new server`);
 });
 
 client.on("guildCreate", guild => {
@@ -59,6 +59,8 @@ client.on("message", async message => {
     m.edit(`who you are. Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
 
+
+//THIS NEEDS TO BE MADE ROBUST.  IT ONLY WORKS WITH A SPECIFIC SPE CHANNEL RIGHT NOW
   if(command === "record") {
     // makes the bot say something and delete the message. As an example, it's open to anyone to use.
     // To get the "message" itself we join the `args` back into a string with spaces:
@@ -69,9 +71,11 @@ client.on("message", async message => {
     //channel = message.guild.channels.get("436745249122025472");
     //message.guild.channels.get("436745249122025472").send(sayMessage);
     //Targeting welcomes
-    message.guild.channels.get("231664026021658624").send(message.member + ":  " + sayMessage);
+    message.guild.channels.get("474584725466513408").send(message.member + ":  " + sayMessage);
     //message.channel.send(sayMessage);
   }
+
+
 
   if(command === "avatar" || command === "avi" || command === "a") {
 	//If no member specified, grabs the author's avi
@@ -85,6 +89,17 @@ client.on("message", async message => {
     // Grabs the mentioned user's avi
     message.channel.send(member.avatarURL);
   }
+
+/*
+if(command === "createRole") {
+  if (message.member.user.id === "266777226412949504")
+  {
+  return client.user.setActivity(`${args.join(" ")}`);
+  }
+  message.channel.send("Sorry, this command is only available to the owner of this bot")
+
+}
+*/
 
 // Ninian is dead.
   if(command === "dead")
@@ -141,6 +156,42 @@ if(command === "inviteme")
   message.channel.send("https://discordapp.com/oauth2/authorize?&client_id=472593993692348416&scope=bot&permissions=0")
 }
 
+// Remember who you are.
+  if(command === "makironi")
+  {
+    message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  }
+
+// Remember who you are.  Again.  And again.  And again.
+
+if(command === "unlimitedmakironiworks"){
+if (message.member.user.id === "266777226412949504")
+{
+  message.channel.send("I am the bringer of my macaroni");
+  message.channel.send("Noodle is my body and cheese is my blood");
+  message.channel.send("I have reminded over a thousand people");
+  message.channel.send("Unknown to Kraft");
+  message.channel.send("Nor known to Love Live");
+  message.channel.send("Have withstood persecution to upload many Makironis");
+  message.channel.send("Yet, those images will never feed anyone");
+  message.channel.send("So as I pray, Unlimited Makironi Works");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+  message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+
+}
+else
+{
+message.channel.send("Sorry, you do not have the necessary religious authority to use this command.")
+}
+}
 if(command === "react" || command === "r")
 {
   const calledMessageID = (`${args[0]}`);
@@ -300,7 +351,7 @@ client.on('roleCreate', async (message) => {
 
     //user = entry.executor.username
     // Targeting audits
-message.guild.channels.get("474584778159423488").send(`A new role was created by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
+message.guild.channels.get("474584725466513408").send(`A new role was created by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
 }
 })
 
@@ -318,7 +369,7 @@ client.on('roleDelete', async (role) =>
   let user = entry.executor.username
   //let deletedRole = entry.target.name
   //  Targeting audits
-  guild.channels.get("474584778159423488").send(`The role ${role.name} was deleted by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
+  guild.channels.get("474584725466513408").send(`The role ${role.name} was deleted by ${user} at [${new Date().toTimeString().split(" ")[0]}].`);
 }})
 
 
@@ -339,27 +390,31 @@ client.on('roleUpdate', async (role) => {
 */
 client.on('emojiCreate', async (emoji) => {
 if (emoji.guild.id === "188345757265297418"){
+  let guild = emoji.guild;
   const entry = await guild.fetchAuditLogs({type: 'EMOJI_CREATE'}).then(audit => audit.entries.first())
   let creator = entry.executor.username
+
   //Targeting audits
-  guild.channels.get("474584778159423488").send(`${emoji.name} has been created by ${creator} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
+  guild.channels.get("474584725466513408").send(`${emoji.name} has been created by ${creator} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
 }})
 
 client.on('emojiUpdate', async (emoji) => {
   if (emoji.guild.id === "188345757265297418"){
+  let guild = emoji.guild;
   const entry = await guild.fetchAuditLogs({type: 'EMOJI_UPDATE'}).then(audit => audit.entries.first())
   let updater = entry.executor.username
+
   //Targeting audits
-  guild.channels.get("474584778159423488").send(`${emoji.name} has been updated by ${updater} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
+  guild.channels.get("474584725466513408").send(`${emoji.name} has been updated by ${updater} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
 }})
 
 client.on('emojiDelete', async (emoji) => {
 if (emoji.guild.id === "188345757265297418"){
+  let guild = emoji.guild;
   const entry = await guild.fetchAuditLogs({type: 'EMOJI_DELETE'}).then(audit => audit.entries.first())
-
   let deleter = entry.executor.username
   //Targeting audits
-  guild.channels.get("474584778159423488").send(`${emoji.name} has been deleted by ${deleter} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
+  guild.channels.get("474584725466513408").send(`${emoji.name} has been deleted by ${deleter} at [${new Date().toTimeString().split(" ")[0]}].  The URL is ${emoji.url} `);
 }})
 
 
@@ -378,10 +433,14 @@ if (member.guild.id === "188345757265297418"){
 
 
 client.on('guildMemberRemove', async (member) => {
-  if (role.guild.id === "188345757265297418"){
+  if (member.guild.id === "188345757265297418"){
   let guild = client.guilds.get("188345757265297418");
   //const logs = guild.channels.find('name', 'logs');
   const entry = await guild.fetchAuditLogs({type: 'MEMBER_KICK'}).then(audit => audit.entries.first())
+
+  console.log('SOMEBODY HAS LEFT THE SERVER.  THE EXECUTOR ID IS')
+  console.log(entry.executor)
+
   //console.log(entry.changes)
   //console.log(roleDelete.role)
   //console.log(`target name is ${entry.target.name}`)
