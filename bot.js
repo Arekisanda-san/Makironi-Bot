@@ -6,10 +6,14 @@ const Discord = require("discord.js");
 // this is what we're refering to. Your client.
 const client = new Discord.Client();
 
+let Parser = require('rss-parser');
+let parser = new Parser();
+
 // Here we load the config.json file that contains our token and our prefix values.
 const config = require("./config.json");
 // config.token contains the bot's token
 // config.prefix contains the message prefix.
+var mostRecentDate = Date.now();
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
@@ -17,6 +21,20 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setActivity(`Now testing new server`);
+
+  let timer = setInterval(async () => {
+ 
+    let feed = await parser.parseURL('https://www.reddit.com/r/coronavirus/new.rss');
+ 
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+      if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);
+        mostRecentDate = isoDate;
+      }
+    });
+ 
+  }, 1000*60);
 });
 
 client.on("guildCreate", guild => {
