@@ -1,0 +1,83 @@
+[
+	{
+		"_comment": "Coronavirus Subreddit",
+		"feed": "https://www.reddit.com/r/coronavirus/new.rss",
+		"channels": [
+			"693259824850403358",
+			"693538491186937866"
+		],
+		"intervalInSeconds": 60
+	},
+	{
+		"_comment": "COVID19 Subreddit",
+		"feed": "https://www.reddit.com/r/COVID19/new.rss",
+		"channels": [
+			"693259824850403358",
+			"693538435654352897"
+		],
+		"intervalInSeconds": 60
+	},
+	{
+		"_comment": "CDC",
+		"feed": "https://tools.cdc.gov/api/v2/resources/media/403372.rss",
+		"channels": [
+			"693259824850403358",
+			"693551718293831681"
+		],
+		"intervalInSeconds": 1800
+	},
+	{
+		"_comment": "WHO",
+		"feed": "https://www.who.int/feeds/entity/csr/don/en/rss.xml",
+		"channels": [
+			"693259824850403358",
+			"693552629070168184"
+		],
+		"intervalInSeconds": 1800
+	},
+	{
+		"_comment": "New York Times",
+		"feed": "https://rss.nytimes.com/services/xml/rss/nyt/Health.xml",
+		"channels": [
+			"693259824850403358",
+			"693554409514336426"
+		],
+		"intervalInSeconds": 1800
+	},
+	{
+		"_comment": "PubMed",
+		"feed": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=10auPZaUOrrbeShYW1G1ERbgiagrkRS_0zJ4qsywtpkwo0494t",
+		"channels": [
+			"693259824850403358",
+			"693555412212908032"
+		],
+		"intervalInSeconds": 1800
+	},
+	{
+		"_comment": "TAMHSC",
+		"feed": "https://calendar.tamu.edu/live/rss/events/group/Texas%20A&M%20Health%20Science%20Center",
+		"channels": [
+			"693259824850403358",
+			"695324902261260309"
+		],
+		"intervalInSeconds": 1800
+	},
+	{
+		"_comment": "KBTX:  News for Bryan and College Station",
+		"feed": "https://www.kbtx.com/content/news/index.rss",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750"
+		],
+		"intervalInSeconds": 1800
+	},
+	{
+		"_comment": "FEMA",
+		"feed": "https://www.fema.gov/feeds/news.rss",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750"
+		],
+		"intervalInSeconds": 1800
+	}
+]
