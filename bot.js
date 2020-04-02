@@ -15,26 +15,222 @@ const config = require("./config.json");
 // config.prefix contains the message prefix.
 var mostRecentDate = Date.now();
 
+
+
+//Coronavirus subreddit
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  client.user.setActivity(`Now testing new server`);
+  client.user.setActivity(`Testing RSS feeds`);
 
   let timer = setInterval(async () => {
- 
+
     let feed = await parser.parseURL('https://www.reddit.com/r/coronavirus/new.rss');
- 
+
     feed.items.forEach(item => {
       isoDate = new Date(item.isoDate).getTime();
       if (isoDate > mostRecentDate) {
-        client.channels.get("693259824850403358").send(item.link);
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("693538491186937866").send(item.link);  //Info server
         mostRecentDate = isoDate;
       }
     });
- 
+
   }, 1000*60);
+});
+
+//COVID19 Subreddit
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Testing RSS feeds`);
+
+  let timer = setInterval(async () => {
+
+    let feed = await parser.parseURL('https://www.reddit.com/r/COVID19/new.rss');
+
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+      if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("693538435654352897").send(item.link);  //Info server
+        mostRecentDate = isoDate;
+      }
+    });
+
+  }, 1000*60);
+});
+
+//CDC
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Testing RSS feeds`);
+
+  let timer = setInterval(async () => {
+
+    let feed = await parser.parseURL('https://tools.cdc.gov/api/v2/resources/media/403372.rss');
+
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+    //  if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("693551718293831681").send(item.link);  //Info server
+        mostRecentDate = isoDate;
+    //  }
+    });
+
+  }, 1000*18000);
+});
+
+//WHO
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Testing RSS feeds`);
+
+  let timer = setInterval(async () => {
+
+    let feed = await parser.parseURL('https://www.who.int/feeds/entity/csr/don/en/rss.xml');
+
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+    //  if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("693552629070168184").send(item.link);  //Info server
+        mostRecentDate = isoDate;
+    //  }
+    });
+
+  }, 1000*18000);
+});
+
+//New York Times
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Testing RSS feeds`);
+
+  let timer = setInterval(async () => {
+
+    let feed = await parser.parseURL('https://rss.nytimes.com/services/xml/rss/nyt/Health.xml');
+
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+    //  if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("693554409514336426").send(item.link);  //Info server
+        mostRecentDate = isoDate;
+    //  }
+    });
+
+  }, 1000*18000);
+});
+
+//PubMed
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Testing RSS feeds`);
+
+  let timer = setInterval(async () => {
+
+    let feed = await parser.parseURL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=10auPZaUOrrbeShYW1G1ERbgiagrkRS_0zJ4qsywtpkwo0494t');
+
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+    //  if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("693555412212908032").send(item.link);  //Info server
+        mostRecentDate = isoDate;
+    //  }
+    });
+
+  }, 1000*18000);
+});
+
+//TAMHSC
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Testing RSS feeds`);
+
+  let timer = setInterval(async () => {
+
+    let feed = await parser.parseURL('https://calendar.tamu.edu/live/rss/events/group/Texas%20A&M%20Health%20Science%20Center');
+
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+      if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("695324902261260309").send(item.link);  //Info server
+        mostRecentDate = isoDate;
+      }
+    });
+
+  }, 1000*1800);
+});
+
+//KBTX:  News for Bryan and College Station
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Testing RSS feeds`);
+
+  let timer = setInterval(async () => {
+
+    let feed = await parser.parseURL('https://www.kbtx.com/content/news/index.rss');
+
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+      if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("695325984261406750").send(item.link);  //Info server
+        mostRecentDate = isoDate;
+      }
+    });
+
+  }, 1000*1800);
+});
+
+//FEMA
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setActivity(`Testing RSS feeds`);
+
+  let timer = setInterval(async () => {
+
+    let feed = await parser.parseURL('https://www.fema.gov/feeds/news.rss');
+
+    feed.items.forEach(item => {
+      isoDate = new Date(item.isoDate).getTime();
+      if (isoDate > mostRecentDate) {
+        client.channels.get("693259824850403358").send(item.link);  //Our server
+        client.channels.get("695325984261406750").send(item.link);  //Info server
+        mostRecentDate = isoDate;
+      }
+    });
+
+  }, 1000*1800);
 });
 
 client.on("guildCreate", guild => {
