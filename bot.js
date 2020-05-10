@@ -20,16 +20,24 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  client.user.setActivity(`Testing RSS feeds`);
-  
+  client.user.setActivity(`Type =h for commands`);
+
   var postedFeeds = [];
   feeds.forEach(rssFeed => {
     let timer = setInterval(async () => {
 
       let feed = await parser.parseURL(rssFeed.feed);
       let channels = rssFeed.channels;
-  
+
       feed.items.forEach(item => {
+        if (!postedFeeds.includes(item.title)) {
+          console.log(item.title);
+          channels.forEach(channel => {
+            client.channels.get(channel).send(item.title);
+          });
+          postedFeeds.push(item.title);
+        }
+
         if (!postedFeeds.includes(item.link)) {
           console.log(item.link);
           channels.forEach(channel => {
@@ -37,6 +45,7 @@ client.on("ready", () => {
           });
           postedFeeds.push(item.link);
         }
+
       });
     }, 1000 * rssFeed.intervalInSeconds);
   });
@@ -78,8 +87,11 @@ client.on("message", async message => {
   if(command === "remember") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
+    if (message.guild.id === "529575902787534848" || message.guild.id === "357359971089907712" || message.guild.id === "241698498926477313")
+    {
     const m = await message.channel.send("remember");
     m.edit(`who you are. Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+    }
   }
 
 
@@ -87,6 +99,8 @@ client.on("message", async message => {
   if(command === "record") {
     // makes the bot say something and delete the message. As an example, it's open to anyone to use.
     // To get the "message" itself we join the `args` back into a string with spaces:
+    if (message.guild.id === "529575902787534848" || message.guild.id === "357359971089907712" || message.guild.id === "241698498926477313")
+    {
     const sayMessage = args.join(" ");
     // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
     message.delete().catch(O_o=>{});
@@ -96,6 +110,7 @@ client.on("message", async message => {
     //Targeting welcomes
     message.guild.channels.get("474584725466513408").send(message.member + ":  " + sayMessage);
     //message.channel.send(sayMessage);
+    }
   }
 
 
@@ -127,11 +142,14 @@ if(command === "createRole") {
 // Ninian is dead.
   if(command === "dead")
   {
+    if (message.guild.id === "529575902787534848" || message.guild.id === "357359971089907712" || message.guild.id === "241698498926477313")
+    {
     if (args.length === 0)
     {
       return message.channel.send(`Ninian is dead.`);
     }
     message.channel.send(`${args.join(" ")} is dead.`);
+    }
   }
 
 if(command === "emoji" || command === "e")
@@ -164,14 +182,25 @@ const calledEmoji = args.join(" ");
 
 if(command === "genesis")
 {
+  if (message.guild.id === "529575902787534848" || message.guild.id === "357359971089907712" || message.guild.id === "241698498926477313")
+  {
   message.channel.send("https://cdn.discordapp.com/attachments/359166220609650688/478388553475424256/unknown.png")
   message.channel.send("This was the screen that popped up when I first started the bot")
+  }
 }
 
 
 if(command === "help" || command === "h")
 {
+  if (message.guild.id === "529575902787534848" || message.guild.id === "357359971089907712" || message.guild.id === "241698498926477313")
+  {
   message.channel.send("=avatar/avi/a \n=dead <text here> \n=bigemoji/be <emoji name here> \n=emoji/e <emoji name here> \n=genesis \n=help/h \n=inviteme \n=record <text here> \n=react/r <messageID(get it by right clicking in dev view)> <emoji name>\n=remember \n=setactivity BOT OWNER ONLY \n")
+  }
+  else {
+    {
+      message.channel.send("=avatar/avi/a \n=bigemoji/be <emoji name here> \n=emoji/e <emoji name here> \n=help/h \n=inviteme \n=react/r <messageID(get it by right clicking in dev view)> <emoji name> \n")
+    }
+  }
 }
 
 if(command === "inviteme")
@@ -180,9 +209,12 @@ if(command === "inviteme")
 }
 
 // Remember who you are.
-  if(command === "makironi")
+if(command === "makironi")
   {
+    if (message.guild.id === "529575902787534848" || message.guild.id === "357359971089907712" || message.guild.id === "241698498926477313")
+    {
     message.channel.send("https://cdn.discordapp.com/attachments/529575902787534850/545077071731359764/13250396_1281523045209977_1237959082_n.jpg");
+    }
   }
 
 // Remember who you are.  Again.  And again.  And again.
@@ -212,7 +244,10 @@ if (message.member.user.id === "266777226412949504")
 }
 else
 {
-message.channel.send("Sorry, you do not have the necessary religious authority to use this command.")
+  if (message.guild.id === "529575902787534848" || message.guild.id === "357359971089907712" || message.guild.id === "241698498926477313")
+  {
+    message.channel.send("Sorry, you do not have the necessary religious authority to use this command.")
+  }
 }
 }
 if(command === "react" || command === "r")
@@ -231,6 +266,13 @@ if(command === "react" || command === "r")
 }
 
 // Only I can use this command, as it's checking for my ID
+
+
+if(command === "selfassess")
+{
+  message.channel.send("REMEMBER, THESE ARE NOT REPLACEMENTS FOR A HEALTH CARE PROVIDER \nhttps://www.mayoclinic.org/covid-19-self-assessment-tool \nhttps://www.hopkinsmedicine.org/coronavirus/covid-19-self-checker.html \nhttps://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html")
+}
+
 if(command === "setactivity")
 {
 

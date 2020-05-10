@@ -40,7 +40,8 @@
 		"feed": "https://rss.nytimes.com/services/xml/rss/nyt/Health.xml",
 		"channels": [
 			"693259824850403358",
-			"693554409514336426"
+			"693554409514336426",
+			"708936707138912286"
 		],
 		"intervalInSeconds": 1800
 	},
@@ -58,7 +59,8 @@
 		"feed": "https://calendar.tamu.edu/live/rss/events/group/Texas%20A&M%20Health%20Science%20Center",
 		"channels": [
 			"693259824850403358",
-			"695324902261260309"
+			"695324902261260309",
+			"708955565048725544"
 		],
 		"intervalInSeconds": 1800
 	},
@@ -67,7 +69,8 @@
 		"feed": "https://www.kbtx.com/content/news/index.rss",
 		"channels": [
 			"693259824850403358",
-			"695325984261406750"
+			"695325984261406750",
+			"708955624158789642"
 		],
 		"intervalInSeconds": 1800
 	},
@@ -76,8 +79,133 @@
 		"feed": "https://www.fema.gov/feeds/news.rss",
 		"channels": [
 			"693259824850403358",
-			"695325984261406750"
+			"695325984261406750",
+			"708948590525153320"
 		],
-		"intervalInSeconds": 1800
+		"intervalInSeconds": 60
+	},
+	{
+		"_comment": "Nature",
+		"feed": "https://www.ncbi.nlm.nih.gov/research/coronavirus-api/feed/?filters=%7B%22journal%22%3A%5B%22Nature%22%5D%7D",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708950628117905428"
+		],
+		"intervalInSeconds": 60
+	},
+
+	{
+		"_comment": "Lancet",
+		"feed": "https://www.ncbi.nlm.nih.gov/research/coronavirus-api/feed/?filters=%7B%22journal%22%3A%5B%22Lancet%22%5D%7D",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708950653602496522"
+		],
+		"intervalInSeconds": 60
+	},
+	{
+		"_comment": "New England Journal of Medicine",
+		"feed": "https://www.ncbi.nlm.nih.gov/research/coronavirus-api/feed/?filters=%7B%22journal%22%3A%5B%22N%20Engl%20J%20Med%22%5D%7D",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708950689828831273"
+		],
+		"intervalInSeconds": 60
+	},
+	{
+		"_comment": "BMJ British Medical Journal",
+		"feed": "https://www.ncbi.nlm.nih.gov/research/coronavirus-api/feed/?filters=%7B%22journal%22%3A%5B%22BMJ%22%5D%7D",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708950751455477770"
+		],
+		"intervalInSeconds": 60
+	},
+
+	{
+		"_comment": "J Med Virol",
+		"feed": "https://www.ncbi.nlm.nih.gov/research/coronavirus-api/feed/?filters=%7B%22journal%22%3A%5B%22J%20Med%20Virol%22%5D%7D",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708950834863538227"
+		],
+		"intervalInSeconds": 60
+	},
+	{
+		"_comment": "NPR",
+		"feed": "https://feeds.npr.org/1128/rss.xml",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708947397786468383"
+		],
+		"intervalInSeconds": 60
+	},
+	{
+		"_comment": "Time",
+		"feed": "https://time.com/health/feed/",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708947375619702845"
+		],
+		"intervalInSeconds": 60
+	},
+
+	{
+		"_comment": "Consumer Product Safety Commission",
+		"feed": "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS/",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708948635165130803"
+		],
+		"intervalInSeconds": 60
+	},
+	{
+		"_comment": "NBC",
+		"feed": "http://feeds.nbcnews.com/nbcnews/public/health",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708950973782949939"
+		],
+		"intervalInSeconds": 60
+	},
+
+	{
+		"_comment": "538",
+		"feed": "https://fivethirtyeight.com/science/feed/",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708952360327839754"
+		],
+		"intervalInSeconds": 60
+	},
+
+	{
+		"_comment": "VitalRecord",
+		"feed": "https://vitalrecord.tamhsc.edu/feed/",
+		"channels": [
+			"708956690384420895"
+		],
+		"intervalInSeconds": 60
+	},
+
+	{
+		"_comment": "CNN",
+		"feed": "http://rss.cnn.com/rss/cnn_health.rss",
+		"channels": [
+			"693259824850403358",
+			"695325984261406750",
+			"708951747858792458"
+		],
+		"intervalInSeconds": 60
 	}
 ]
